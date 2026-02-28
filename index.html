@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dr. Bharti Nayak, Convocation 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          display: ['"Playfair Display"', 'serif'],
+          serif2: ['"Cormorant Garamond"', 'serif'],
+          body: ['"DM Sans"', 'sans-serif'],
+        },
+      },
+    },
+  };
+</script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: #F9FAFB; color: #1F2937; overflow-x: hidden; }
+
+  /* Fade-up animations */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.85s cubic-bezier(.4,0,.2,1), transform 0.85s cubic-bezier(.4,0,.2,1);
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .fade-up.d1 { transition-delay: 0.10s; }
+  .fade-up.d2 { transition-delay: 0.22s; }
+  .fade-up.d3 { transition-delay: 0.34s; }
+  .fade-up.d4 { transition-delay: 0.46s; }
+  .fade-up.d5 { transition-delay: 0.58s; }
+
+  /* Navbar */
+  #navbar { transition: background 0.4s ease, box-shadow 0.4s ease; }
+  #navbar.scrolled {
+    background: rgba(249,250,251,0.93) !important;
+    backdrop-filter: blur(14px);
+    box-shadow: 0 1px 28px rgba(31,41,55,0.07);
+  }
+  .nav-link { position: relative; }
+  .nav-link::after {
+    content: ''; position: absolute; left: 0; bottom: -2px;
+    width: 0; height: 1px; background: #7FA8C9;
+    transition: width 0.3s ease;
+  }
+  .nav-link:hover::after { width: 100%; }
+
+  /* Blobs */
+  .blob {
+    position: absolute; border-radius: 50%;
+    filter: blur(72px); pointer-events: none;
+  }
+
+  /* Portrait ring pulse */
+  .portrait-wrap { position: relative; display: inline-block; }
+  .portrait-wrap::before {
+    content: ''; position: absolute; inset: -12px;
+    border-radius: 50%; border: 1.5px solid rgba(107,168,201,0.25);
+    animation: ringPulse 4s ease-in-out infinite;
+  }
+  .portrait-wrap::after {
+    content: ''; position: absolute; inset: -26px;
+    border-radius: 50%; border: 1px solid rgba(107,168,201,0.12);
+    animation: ringPulse 4s ease-in-out 0.9s infinite;
+  }
+  @keyframes ringPulse {
+    0%,100% { opacity: 0.55; transform: scale(1); }
+    50%      { opacity: 1;    transform: scale(1.025); }
+  }
+
+  /* Cards */
+  .card-lift { transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; }
+  .card-lift:hover { transform: translateY(-5px); box-shadow: 0 18px 52px rgba(31,41,55,0.09); }
+
+  /* Divider */
+  .divider {
+    width: 56px; height: 1px;
+    background: linear-gradient(90deg, transparent, #7FA8C9, transparent);
+    margin: 1.5rem auto;
+  }
+
+  /* Section label */
+  .slabel {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.64rem; letter-spacing: 0.26em;
+    text-transform: uppercase; color: #7FA8C9; font-weight: 500;
+  }
+
+  .dedication-text { font-family: 'Cormorant Garamond', serif; font-style: italic; letter-spacing: 0.02em; line-height: 1.9; }
+
+  /* Scroll cue */
+  @keyframes scrollDrop { 0%,100%{opacity:.4;transform:translateY(0)} 50%{opacity:.1;transform:translateY(6px)} }
+  .scroll-cue { animation: scrollDrop 2.2s ease-in-out infinite; }
+
+  /* ───── FLOWER BURST ───── */
+  .flower-overlay {
+    position: fixed; inset: 0; pointer-events: none; z-index: 9999; overflow: hidden;
+  }
+  .petal {
+    position: absolute; font-size: 1.4rem; opacity: 0;
+    animation: petalFly var(--dur) cubic-bezier(.25,.46,.45,.94) var(--delay) forwards;
+    transform-origin: center;
+    user-select: none;
+  }
+  @keyframes petalFly {
+    0%   { opacity: 0; transform: translate(0,0) rotate(0deg) scale(0.4); }
+    15%  { opacity: 1; }
+    80%  { opacity: 0.85; }
+    100% { opacity: 0; transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(var(--sc)); }
+  }
+
+  /* Celebrate button shine */
+  .btn-celebrate {
+    position: relative; overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .btn-celebrate::after {
+    content: ''; position: absolute; top: -50%; left: -75%;
+    width: 50%; height: 200%; background: rgba(255,255,255,0.28);
+    transform: skewX(-20deg); transition: left 0.5s ease;
+  }
+  .btn-celebrate:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(127,168,201,0.4); }
+  .btn-celebrate:hover::after { left: 140%; }
+  .btn-celebrate:active { transform: scale(0.97); }
+</style>
+</head>
+<body>
+
+<!-- FLOWER OVERLAY CONTAINER -->
+<div class="flower-overlay" id="flowerOverlay"></div>
+
+<!-- ═══════ NAVBAR ═══════ -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 py-4 px-6 md:px-12">
+  <div class="max-w-6xl mx-auto flex items-center justify-between">
+    <span class="font-display text-[#1F2937] text-base tracking-wide font-medium select-none">Dr. Bharti Nayak</span>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#about"       class="nav-link font-body text-sm text-[#4B5563] hover:text-[#1F2937] transition-colors duration-200">About</a>
+      <a href="#vision"      class="nav-link font-body text-sm text-[#4B5563] hover:text-[#1F2937] transition-colors duration-200">Vision</a>
+      <a href="#dedication"  class="nav-link font-body text-sm text-[#4B5563] hover:text-[#1F2937] transition-colors duration-200">A Message</a>
+    </div>
+    <div class="md:hidden flex items-center gap-5">
+      <a href="#about"      class="font-body text-xs text-[#4B5563]">About</a>
+      <a href="#dedication" class="font-body text-xs text-[#4B5563]">A Message</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════ HERO ═══════ -->
+<section id="hero" class="relative min-h-screen flex items-center pt-20 overflow-hidden bg-[#F9FAFB]">
+  <div class="blob w-[520px] h-[520px] bg-[#E6F0FA] opacity-65 top-[-140px] left-[-180px]" style="z-index:0;"></div>
+  <div class="blob w-[380px] h-[380px] bg-[#FCEDEE] opacity-55 bottom-[-90px] right-[-110px]" style="z-index:0;"></div>
+
+  <div class="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12 py-24">
+    <div class="flex flex-col-reverse md:flex-row items-center gap-16 md:gap-12">
+
+      <!-- TEXT LEFT -->
+      <div class="flex-1 text-center md:text-left">
+        <p class="slabel fade-up mb-5">Celebrating Convocation Day 2026</p>
+
+        <h1 class="font-display text-4xl sm:text-5xl md:text-6xl text-[#1F2937] leading-tight tracking-wide fade-up d1">
+          Dr. Bharti Nayak,<br />
+          <span class="italic font-normal text-3xl sm:text-4xl md:text-[3.2rem] text-[#4B5563]">BDS</span>
+        </h1>
+
+        <div class="divider fade-up d2 md:mx-0"></div>
+
+        <p class="font-serif2 text-xl md:text-2xl text-[#4B5563] italic tracking-wider fade-up d2">
+          Compassion. Precision. Dedication.
+        </p>
+
+        <p class="mt-6 font-body text-sm md:text-base text-[#6B7280] max-w-sm mx-auto md:mx-0 leading-relaxed fade-up d3">
+          A new chapter in dentistry begins today, rooted in care, guided by knowledge, and devoted to the communities of Dentistry, Chhattisgarh.
+        </p>
+
+        <div class="mt-10 flex items-center gap-3 justify-center md:justify-start fade-up d4">
+          <div class="w-8 h-px bg-[#A8C8DF]"></div>
+          <span class="font-body text-[0.65rem] tracking-widest text-[#A8C8DF] uppercase">Bachelor of Dental Surgery</span>
+          <div class="w-8 h-px bg-[#A8C8DF]"></div>
+        </div>
+      </div>
+
+      <!-- PORTRAIT RIGHT -->
+      <div class="flex-shrink-0 flex items-center justify-center fade-up d2">
+        <div class="portrait-wrap">
+          <!-- Glow behind image -->
+          <div class="absolute inset-0 rounded-full bg-gradient-radial from-[#C8DDEF]/60 to-transparent blur-2xl scale-125" style="z-index:-1;"></div>
+          <div class="relative w-52 h-52 md:w-72 md:h-72 rounded-full overflow-hidden shadow-2xl ring-4 ring-white/80">
+            <img src="IMG01.jpg" alt="Dr. " class="w-full h-full object-cover object-top" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#1F2937]/10 to-transparent"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scroll cue -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
+    <div class="scroll-cue w-px h-10 bg-[#4B5563] opacity-30"></div>
+  </div>
+</section>
+
+<!-- ═══════ ABOUT ═══════ -->
+<section id="about" class="py-24 bg-white relative overflow-hidden">
+  <div class="blob w-[300px] h-[300px] bg-[#FCEDEE] opacity-35 top-[-50px] right-[-80px]" style="z-index:0;"></div>
+  <div class="relative z-10 max-w-6xl mx-auto px-6 md:px-12">
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+
+      <div>
+        <p class="slabel fade-up mb-4">Who She Is</p>
+        <h2 class="font-display text-3xl md:text-4xl text-[#1F2937] leading-snug tracking-wide fade-up d1">About the Doctor</h2>
+        <div class="divider mt-5 mb-8 mx-0 fade-up d1"></div>
+        <p class="font-body text-[#4B5563] leading-relaxed text-base fade-up d2">
+          A hardworking, kind, and visionary dental graduate, GDC Raipur, Chhattisgarh.
+        </p>
+        <p class="font-body text-[#4B5563] leading-relaxed text-base mt-5 fade-up d3">
+          Hardworking in discipline, kind in character, and visionary in outlook, she has navigated her BDS journey with grace and resolve.
+          She carries a deep connection to her roots and an even deeper desire to serve the people around her.
+        </p>
+        <p class="font-body text-[#4B5563] leading-relaxed text-base mt-5 fade-up d4">
+          Her journey through dentistry has been defined by discipline, empathy, and quiet determination. She believes healing begins with trust, and trust begins with listening.
+        </p>
+      </div>
+
+      <div class="fade-up d2">
+        <div class="relative rounded-2xl overflow-hidden shadow-lg" style="height:360px;">
+          <div class="w-full h-full bg-gradient-to-br from-[#E6F0FA] to-[#FCEDEE] flex items-end p-8">
+            <div class="bg-white/70 backdrop-blur-sm rounded-xl p-5 w-full shadow-sm">
+              <p class="font-serif2 italic text-[#1F2937] text-lg leading-relaxed">
+                "She chose dentistry not because it was easy, but because she knew it would let her make a meaningful difference. One smile at a time."
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="mt-6 grid grid-cols-3 gap-3">
+          <div class="rounded-xl bg-[#E6F0FA]/60 p-4 text-center">
+            <p class="font-display text-[#1F2937] text-lg font-semibold">5+</p>
+            <p class="font-body text-xs text-[#6B7280] mt-1">Years of Study</p>
+          </div>
+          <div class="rounded-xl bg-[#FCEDEE]/60 p-4 text-center">
+            <p class="font-display text-[#1F2937] text-lg font-semibold">BDS</p>
+            <p class="font-body text-xs text-[#6B7280] mt-1">Degree Earned</p>
+          </div>
+          <div class="rounded-xl bg-[#E6F0FA]/40 p-4 text-center">
+            <p class="font-display text-[#1F2937] text-lg font-semibold">2026</p>
+            <p class="font-body text-xs text-[#6B7280] mt-1">Convocation</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ LOOKING FORWARD ═══════ -->
+<section id="vision" class="py-24 relative overflow-hidden" style="background: linear-gradient(160deg, #EDF4FB 0%, #F9FAFB 55%, #FCEEF0 100%);">
+  <div class="blob w-[400px] h-[400px] bg-[#C8DDEF] opacity-20 top-0 left-[-120px]" style="z-index:0;"></div>
+  <div class="relative z-10 max-w-6xl mx-auto px-6 md:px-12">
+    <div class="text-center mb-16">
+      <p class="slabel fade-up mb-4">Looking Forward</p>
+      <h2 class="font-display text-3xl md:text-4xl text-[#1F2937] tracking-wide fade-up d1">A Vision Beyond Graduation</h2>
+      <div class="divider fade-up d1"></div>
+    </div>
+
+    <div class="max-w-3xl mx-auto">
+      <div class="relative fade-up d1 mb-12">
+        <span class="absolute -top-6 -left-2 md:-left-8 font-display italic text-[#C8DDEF] select-none" style="font-size:5.5rem;line-height:0.7;">"</span>
+        <blockquote class="font-serif2 text-2xl md:text-3xl italic text-[#1F2937] leading-relaxed tracking-wide pl-6 md:pl-10 border-l-2 border-[#A8C8DF]">
+          Behind this degree stands the uncountable love, support and encouragement of my family and friends. I carry their encouragement with me into every step of my journey ahead. <br>— Dr. Bharti Nayak
+        </blockquote>
+      </div>
+
+      <div class="grid sm:grid-cols-3 gap-6 fade-up d2">
+        <div class="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-sm border border-[#E6F0FA]/60 card-lift">
+          <div class="w-9 h-9 rounded-full bg-[#E6F0FA] flex items-center justify-center mb-4">
+            <svg class="w-4 h-4 text-[#1F2937]" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-[#1F2937] text-base font-medium mb-2">The Love Of My Family</h3>
+          <p class="font-body text-sm text-[#6B7280] leading-relaxed">Every step of my journey has been strengthened by the unwavering love & sacrifices of my family and the guidance and constant support of my sisters :)</p>
+        </div>
+        <div class="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-sm border border-[#E6F0FA]/60 card-lift">
+          <div class="w-9 h-9 rounded-full bg-[#FCEDEE] flex items-center justify-center mb-4">
+            <svg class="w-4 h-4 text-[#1F2937]" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
+              <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-[#1F2937] text-base font-medium mb-2">Encouraged By Loyal Friendship</h3>
+          <p class="font-body text-sm text-[#6B7280] leading-relaxed">Through every challenge, my friends stood beside me, turning difficult moments into strength and motivation.</p>
+        </div>
+        <div class="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-sm border border-[#E6F0FA]/60 card-lift">
+          <div class="w-9 h-9 rounded-full bg-[#E6F0FA] flex items-center justify-center mb-4">
+            <svg class="w-4 h-4 text-[#1F2937]" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .86.436 1.62 1.108 2.059"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-[#1F2937] text-base font-medium mb-2">Driven By A Dream Years In The Making</h3>
+          <p class="font-body text-sm text-[#6B7280] leading-relaxed">What began as a dream years ago now marks the beginning of a lifelong commitment to growth and purpose.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ A MESSAGE ═══════ -->
+<section id="dedication" class="py-28 relative overflow-hidden">
+  <div class="absolute inset-0 z-0" style="background: linear-gradient(140deg, #FCEDEE 0%, #F9FAFB 48%, #E6F0FA 100%);"></div>
+  <div class="blob w-[360px] h-[360px] bg-[#FCEDEE] opacity-55 top-[-60px] right-[-80px]" style="z-index:1;"></div>
+  <div class="blob w-[280px] h-[280px] bg-[#E6F0FA] opacity-45 bottom-[-40px] left-[-60px]" style="z-index:1;"></div>
+
+  <div class="relative z-10 max-w-3xl mx-auto px-6 md:px-12 text-center">
+    <p class="slabel fade-up mb-6">A Message for You</p>
+
+    <span class="block font-display italic text-[#C8DDEF] select-none fade-up d1" style="font-size:5rem;line-height:0.75;">"</span>
+
+    <p class="dedication-text text-2xl md:text-3xl text-[#1F2937] leading-loose fade-up d2 mt-2">
+      Today, I don't just see a graduate <br class="hidden md:block"/>
+      I see the doctor you worked so hard to become.
+    </p>
+
+    <div class="divider my-8 fade-up d2"></div>
+
+    <p class="dedication-text text-lg md:text-xl text-[#4B5563] leading-loose fade-up d3">
+      Every late night, every difficult exam, every moment of doubt, they all led here. To this day. To this title. To <em>you</em>.
+    </p>
+
+    <p class="dedication-text text-lg md:text-xl text-[#1F2937] mt-6 leading-loose fade-up d4">
+      This is only the beginning. I will be always there for you :)
+    </p>
+
+    <div class="mt-14 fade-up d4">
+      <div class="inline-block bg-white/75 backdrop-blur-sm border border-[#FCEDEE] rounded-2xl px-8 py-5 shadow-sm mb-10">
+        <p class="font-display text-2xl md:text-3xl text-[#1F2937] tracking-wide">Congratulations, Bharti :) 🎓</p>
+        <p class="font-body text-xs text-[#6B7280] mt-2 tracking-widest uppercase">Convocation 2026 · GDC Raipur, Chhattisgarh</p>
+      </div>
+    </div>
+
+    <!-- ✦ CELEBRATE BUTTON ✦ -->
+    <div class="fade-up d5">
+      <button
+        id="celebrateBtn"
+        class="btn-celebrate inline-flex items-center gap-3 bg-gradient-to-r from-[#7FA8C9] to-[#C9A0B0] text-white font-body font-medium text-sm tracking-widest uppercase px-8 py-4 rounded-full shadow-lg"
+        onclick="launchFlowers()"
+      >
+        <span>🌸</span>
+        <span>Celebrate with Her</span>
+        <span>🌸</span>
+      </button>
+      <p class="font-body text-xs text-[#9CA3AF] mt-4 tracking-wide">Click to send flowers her way</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer class="bg-[#1F2937] py-10 text-center">
+  <p class="font-body text-sm text-gray-400 tracking-wide">© 2026 Dr. Bharti Nayak, BDS</p>
+  <p class="font-body text-xs text-gray-500 mt-1 tracking-widest uppercase">Made With 💙 by 0xchitra</p>
+</footer>
+
+<script>
+  /* ── Navbar scroll ── */
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 28);
+  }, { passive: true });
+
+  /* ── Fade-up Intersection Observer ── */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.2 });
+  document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+  /* ── Flower burst ── */
+  const flowerEmojis = ['🌸','🌺','🌼','🌷','🪷','💐','✿','❀','🌹','🌻'];
+  const msgEmojis    = ['🎓','✨','💫','⭐','🥂','🎉'];
+
+  function rand(min, max) { return Math.random() * (max - min) + min; }
+
+  function launchFlowers() {
+    const overlay = document.getElementById('flowerOverlay');
+    overlay.innerHTML = '';
+
+    const total = 72;
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+
+    /* Burst origin slightly above screen centre-bottom */
+    const ox = vw / 2;
+    const oy = vh * 0.85;
+
+    for (let i = 0; i < total; i++) {
+      const el = document.createElement('span');
+      el.classList.add('petal');
+
+      const emoji = i % 9 === 0
+        ? msgEmojis[Math.floor(Math.random() * msgEmojis.length)]
+        : flowerEmojis[Math.floor(Math.random() * flowerEmojis.length)];
+
+      el.textContent = emoji;
+
+      /* Random spread direction — weighted upward */
+      const angle  = rand(-200, 20);   /* degrees from top, mostly upward */
+      const dist   = rand(180, Math.max(vw, vh) * 0.85);
+      const rad    = (angle - 90) * Math.PI / 180;
+      const tx     = Math.cos(rad) * dist;
+      const ty     = Math.sin(rad) * dist;
+      const rot    = rand(-540, 540)  + 'deg';
+      const scale  = rand(0.6, 1.8);
+      const dur    = rand(6, 12)   + 's';
+      const delay  = rand(0, 0.55)    + 's';
+      const size   = rand(1.0, 2.2)   + 'rem';
+
+      el.style.cssText = `
+        left:${ox}px; top:${oy}px;
+        font-size:${size};
+        --tx:${tx}px; --ty:${ty}px;
+        --rot:${rot}; --sc:${scale};
+        --dur:${dur}; --delay:${delay};
+      `;
+      overlay.appendChild(el);
+    }
+
+    /* Show celebratory toast */
+    showToast();
+
+    /* Clean up after longest animation */
+    setTimeout(() => { overlay.innerHTML = ''; }, 8500);
+  }
+
+  function showToast() {
+    const existing = document.getElementById('toastMsg');
+    if (existing) existing.remove();
+
+    const toast = document.createElement('div');
+    toast.id = 'toastMsg';
+    toast.style.cssText = `
+      position:fixed; bottom:36px; left:50%; transform:translateX(-50%) translateY(20px);
+      z-index:10000; background:rgba(255,255,255,0.95);
+      backdrop-filter:blur(12px);
+      border:1px solid rgba(252,237,238,0.9);
+      padding:14px 28px; border-radius:999px;
+      font-family:'Cormorant Garamond',serif; font-style:italic;
+      font-size:1.05rem; color:#1F2937; letter-spacing:0.03em;
+      box-shadow:0 8px 40px rgba(31,41,55,0.12);
+      opacity:0; transition:opacity 0.5s ease, transform 0.5s ease;
+      white-space:nowrap;
+    `;
+    toast.textContent = '🌸 Congratulations, Bharti :) 🌸';
+    document.body.appendChild(toast);
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        toast.style.opacity = '1';
+        toast.style.transform = 'translateX(-50%) translateY(0)';
+      });
+    });
+
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateX(-50%) translateY(12px)';
+      setTimeout(() => toast.remove(), 600);
+    }, 5000);
+  }
+</script>
+</body>
+</html>
