@@ -392,7 +392,7 @@
     const overlay = document.getElementById('flowerOverlay');
     overlay.innerHTML = '';
 
-    const total = 72;
+    const total = 248;
     const vw = window.innerWidth;
     const vh = window.innerHeight;
 
@@ -419,7 +419,7 @@
       const rot    = rand(-540, 540)  + 'deg';
       const scale  = rand(0.6, 1.8);
       const dur    = rand(20, 36)   + 's';
-      const delay  = rand(0, 0.55)    + 's';
+      const delay  = rand(0, 4)    + 's';
       const size   = rand(1.0, 2.2)   + 'rem';
 
       el.style.cssText = `
@@ -436,7 +436,7 @@
     showToast();
 
     /* Clean up after longest animation */
-    setTimeout(() => { overlay.innerHTML = ''; }, 8500);
+    setTimeout(() => { overlay.innerHTML = ''; }, 41000);
   }
 
   function showToast() {
@@ -457,7 +457,7 @@
       opacity:0; transition:opacity 0.5s ease, transform 0.5s ease;
       white-space:nowrap;
     `;
-    toast.textContent = '🌸 Congratulations, Bharti :) 🌸';
+    toast.textContent = '🌸 Congratulations, Bharti:) 🌸';
     document.body.appendChild(toast);
 
     requestAnimationFrame(() => {
@@ -471,8 +471,9 @@
       toast.style.opacity = '0';
       toast.style.transform = 'translateX(-50%) translateY(12px)';
       setTimeout(() => toast.remove(), 600);
-    }, 5000);
+    }, 9000);
   }
 </script>
 </body>
+
 </html>
